@@ -1,4 +1,3 @@
-import Header from "@/components/component/Header";
 import LeftSidebar from "@/components/component/LeftSidebar";
 import MainContent from "@/components/component/MainContent";
 import RightSidebar from "@/components/component/RightSidebar";

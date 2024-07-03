@@ -2,10 +2,7 @@
 
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { LogInIcon, SearchIcon, BellIcon, MailIcon } from "./Icons";
-import { ClerkLoading } from "@clerk/nextjs";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 export default function Header() {
   return (
@@ -32,22 +29,7 @@ export default function Header() {
           </Link>
 
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <div>
-              <ClerkLoading>
-                <div
-                  className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-                  role="status"
-                ></div>
-              </ClerkLoading>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-              <SignedOut>
-                <div className="w-20">
-                  <Link href={"/sign-in"}>ログイン</Link>
-                </div>
-              </SignedOut>
-            </div>
+            <div></div>
           </Link>
         </div>
       </div>
