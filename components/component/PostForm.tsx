@@ -15,6 +15,7 @@ export default function PostForm() {
         type="text"
         placeholder="What's on your mind?"
         className="flex-1 rounded-full bg-muted px-4 py-2"
+        name="post"
       />
       <Button variant="ghost" size="icon">
         <SendIcon className="h-5 w-5 text-muted-foreground" />
