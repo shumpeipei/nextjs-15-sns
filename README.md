@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 npm起動（localhostで接続できる）
 $ npm run dev
 ngrok起動（外部URLでアクセスできる。URLは起動コマンド内に出力される）
-# ngrok http 3000
+$ ngrok http 3000
