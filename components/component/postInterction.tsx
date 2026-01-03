@@ -1,7 +1,7 @@
 "use client";
 import React, { FormEvent, useOptimistic, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { HeartIcon, MessageCircleIcon, Share2Icon } from "./Icons";
+import { HeartIcon, MessageCircleIcon, Share2Icon, EditIcon } from "./Icons";
 import { useAuth } from "@clerk/nextjs";
 import { liveAction } from "@/lib/action";
 
@@ -62,6 +62,9 @@ const PostInterction = ({ postId, initialLikes, commentNumber }: PostInterctionP
             <span>{commentNumber}</span>
             <Button variant="ghost" size="icon">
                 <Share2Icon className="h-5 w-5 text-muted-foreground" />
+            </Button>
+            <Button variant="ghost" size="icon">
+                <EditIcon className="h-5 w-5 text-muted-foreground" />
             </Button>
         </div>
     );
