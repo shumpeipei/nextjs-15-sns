@@ -19,11 +19,6 @@ type PostInterctionProps = {
 const PostInterction = ({ postId, initialLikes, commentNumber }: PostInterctionProps) => {
 
     const { userId } = useAuth();
-    // const [likeState, setLikeState] = useState(
-    //     {
-    //         likeCount: initialLikes.length,
-    //         isLiked: userId ? initialLikes.includes(userId) : false
-    //     });
 
     const initialState = {
         likeCount: initialLikes.length,
@@ -41,16 +36,8 @@ const PostInterction = ({ postId, initialLikes, commentNumber }: PostInterctionP
 
         try {
             addOptimisticLike();
-            // setLikeState((prev) => ({
-            //     likeCount: prev.isLiked ? prev.likeCount + 1 : prev.likeCount - 1,
-            //     isLiked: !prev.isLiked,
-            // }));
             await liveAction(postId);
         } catch (err) {
-            // setLikeState((prev) => ({
-            //     likeCount: prev.isLiked ? prev.likeCount - 1 : prev.likeCount + 1,
-            //     isLiked: !prev.isLiked,
-            // }));
             console.log(err);
         }
     }

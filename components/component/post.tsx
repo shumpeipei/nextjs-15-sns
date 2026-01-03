@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { HeartIcon, MessageCircleIcon, Share2Icon, ClockIcon } from "./Icons";
+import { HeartIcon, MessageCircleIcon, Share2Icon, ClockIcon, EditIcon } from "./Icons";
 import prisma from "@/lib/prisma";
 import PostInterction from "./postInterction";
 import Link from "next/link";
@@ -39,25 +39,6 @@ const Post = ({ post }: any) => {
           <span>{post.createdAt.toLocaleString()}</span>
         </div>
       </div>
-      {/* {post.comments && (
-            <div className="mt-4 border-t pt-4 space-y-2">
-              {post.comments.map((comment, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>AC</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <p className="font-medium">{comment.author}</p>
-                    <p className="text-muted-foreground">{comment.content}</p>
-                  </div>
-                  <Button variant="ghost" size="icon">
-                    <HeartIcon className="h-5 w-5 text-muted-foreground" />
-                  </Button>
-                </div>
-              ))}
-            </div>
-          )} */}
     </div>
   )
 };
