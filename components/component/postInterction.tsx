@@ -15,9 +15,10 @@ type PostInterctionProps = {
     initialLikes: string[];
     commentNumber: number;
     initialContent: string;
+    isOwnPost: boolean;
 };
 
-const PostInterction = ({ postId, initialLikes, commentNumber, initialContent }: PostInterctionProps) => {
+const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, isOwnPost }: PostInterctionProps) => {
 
     const { userId } = useAuth();
 
@@ -82,31 +83,35 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent }:
             <Button variant="ghost" size="icon">
                 <Share2Icon className="h-5 w-5 text-muted-foreground" />
             </Button>
-            <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                onClick={handleOpenEditor}
-            >
-                <EditIcon className="h-5 w-5 text-muted-foreground" />
-            </Button>
-            {isEditing && (
-                <div className="absolute left-0 top-full z-10 mt-3 w-80 rounded-lg border bg-background p-4 shadow-lg">
-                    <p className="mb-2 text-sm font-semibold text-muted-foreground">投稿内容を編集</p>
-                    <textarea
-                        className="h-32 w-full resize-none rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                        value={editingContent}
-                        onChange={(event) => setEditingContent(event.target.value)}
-                    />
-                    <div className="mt-3 flex justify-end gap-2">
-                        <Button variant="outline" size="sm" type="button" onClick={handleCancelEdit}>
-                            キャンセル
-                        </Button>
-                        <Button size="sm" type="button" onClick={handleUpdate}>
-                            更新
-                        </Button>
-                    </div>
-                </div>
+            {isOwnPost && (
+                <>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        type="button"
+                        onClick={handleOpenEditor}
+                    >
+                        <EditIcon className="h-5 w-5 text-muted-foreground" />
+                    </Button>
+                    {isEditing && (
+                        <div className="absolute left-0 top-full z-10 mt-3 w-80 rounded-lg border bg-background p-4 shadow-lg">
+                            <p className="mb-2 text-sm font-semibold text-muted-foreground">投稿内容を編集</p>
+                            <textarea
+                                className="h-32 w-full resize-none rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                                value={editingContent}
+                                onChange={(event) => setEditingContent(event.target.value)}
+                            />
+                            <div className="mt-3 flex justify-end gap-2">
+                                <Button variant="outline" size="sm" type="button" onClick={handleCancelEdit}>
+                                    キャンセル
+                                </Button>
+                                <Button size="sm" type="button" onClick={handleUpdate}>
+                                    更新
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import PostInterction from "./postInterction";
 import Link from "next/link";
 
-const Post = ({ post }: any) => {
+const Post = ({ post, currentUserId }: { post: any; currentUserId: string }) => {
   return (
     <div
       key={post.id}
@@ -33,6 +33,7 @@ const Post = ({ post }: any) => {
             initialLikes={post.likes.map((like: any) => like.userId)}
             commentNumber={post._count.replies}
             initialContent={post.content}
+            isOwnPost={post.authorId === currentUserId}
           />
         </div >
         <div className="flex items-center gap-2 text-muted-foreground">
