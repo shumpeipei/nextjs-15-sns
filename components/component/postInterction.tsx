@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useOptimistic, useState } from "react";
+import React, { FormEvent, useEffect, useOptimistic, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { HeartIcon, MessageCircleIcon, Share2Icon, EditIcon } from "./Icons";
 import { useAuth } from "@clerk/nextjs";
@@ -37,7 +37,26 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, i
     const [isEditing, setIsEditing] = useState(false);
     const [editingContent, setEditingContent] = useState(initialContent);
 
+    useEffect(() => {
+        if (typeof window === "undefined") {
+            return;
+        }
+        const closeOtherEditors = (event: Event) => {
+            const custom = event as CustomEvent<{ postId: string }>;
+            if (custom.detail?.postId !== postId) {
+                setIsEditing(false);
+            }
+        };
+        window.addEventListener("post-edit-open", closeOtherEditors as EventListener);
+        return () => {
+            window.removeEventListener("post-edit-open", closeOtherEditors as EventListener);
+        };
+    }, [postId]);
+
     const handleOpenEditor = () => {
+        if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("post-edit-open", { detail: { postId } }));
+        }
         setEditingContent(initialContent);
         setIsEditing(true);
     };
