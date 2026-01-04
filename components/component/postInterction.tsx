@@ -36,6 +36,7 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, i
 
     const [isEditing, setIsEditing] = useState(false);
     const [editingContent, setEditingContent] = useState(initialContent);
+    const [validationError, setValidationError] = useState("");
 
     useEffect(() => {
         if (typeof window === "undefined") {
@@ -58,15 +59,22 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, i
             window.dispatchEvent(new CustomEvent("post-edit-open", { detail: { postId } }));
         }
         setEditingContent(initialContent);
+        setValidationError("");
         setIsEditing(true);
     };
 
     const handleCancelEdit = () => {
         setEditingContent(initialContent);
+        setValidationError("");
         setIsEditing(false);
     };
 
     const handleUpdate = () => {
+        if (!editingContent.trim()) {
+            setValidationError("1文字以上入力してください");
+            return;
+        }
+        setValidationError("");
         // バックエンド未実装のため局所的に閉じるだけ
         setIsEditing(false);
     };
@@ -118,8 +126,16 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, i
                             <textarea
                                 className="h-32 w-full resize-none rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                                 value={editingContent}
-                                onChange={(event) => setEditingContent(event.target.value)}
+                                onChange={(event) => {
+                                    setEditingContent(event.target.value);
+                                    if (validationError && event.target.value.trim().length) {
+                                        setValidationError("");
+                                    }
+                                }}
                             />
+                            {validationError && (
+                                <p className="mt-1 text-sm text-destructive">{validationError}</p>
+                            )}
                             <div className="mt-3 flex justify-end gap-2">
                                 <Button variant="outline" size="sm" type="button" onClick={handleCancelEdit}>
                                     キャンセル
