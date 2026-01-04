@@ -32,6 +32,7 @@ const Post = ({ post }: any) => {
             postId={post.id}
             initialLikes={post.likes.map((like: any) => like.userId)}
             commentNumber={post._count.replies}
+            initialContent={post.content}
           />
         </div >
         <div className="flex items-center gap-2 text-muted-foreground">
