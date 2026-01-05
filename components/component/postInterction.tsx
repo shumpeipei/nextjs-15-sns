@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useOptimistic, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { HeartIcon, MessageCircleIcon, Share2Icon, EditIcon } from "./Icons";
 import { useAuth } from "@clerk/nextjs";
-import { liveAction } from "@/lib/action";
+import { liveAction, updatePostAction } from "@/lib/action";
 
 
 interface likeState {
@@ -69,14 +69,23 @@ const PostInterction = ({ postId, initialLikes, commentNumber, initialContent, i
         setIsEditing(false);
     };
 
-    const handleUpdate = () => {
+    const handleUpdate = async () => {
         if (!editingContent.trim()) {
             setValidationError("1文字以上入力してください");
             return;
         }
-        setValidationError("");
-        // バックエンド未実装のため局所的に閉じるだけ
-        setIsEditing(false);
+
+        try {
+            setValidationError("");
+            await updatePostAction(postId, editingContent);
+            setIsEditing(false);
+        } catch (err) {
+            if (err instanceof Error) {
+                setValidationError(err.message);
+            } else {
+                setValidationError("更新に失敗しました");
+            }
+        }
     };
 
     const hundleLikeSubmit = async () => {
