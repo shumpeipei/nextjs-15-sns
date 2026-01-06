@@ -38,7 +38,12 @@ const Post = ({ post, currentUserId }: { post: any; currentUserId: string }) => 
         </div >
         <div className="flex items-center gap-2 text-muted-foreground">
           <ClockIcon className="h-5 w-5" />
-          <span>{post.createdAt.toLocaleString()}</span>
+          <div className="flex items-center gap-1.5">
+            {post.createdAt.getTime() !== post.updatedAt.getTime() && (
+              <span className="text-xs">編集済み</span>
+            )}
+            <span>{post.createdAt.toLocaleString()}</span>
+          </div>
         </div>
       </div>
     </div>
