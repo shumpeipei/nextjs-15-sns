@@ -100,6 +100,51 @@ export const liveAction = async (postId: string) => {
     }
 }
 
+export const updatePostAction = async (postId: string, content: string) => {
+    const { userId } = auth();
+    if (!userId) {
+        throw new Error("ユーザーが認証されていません");
+    }
+
+    try {
+        // バリデーション
+        const contentSchema = z
+            .string()
+            .min(1, "1文字以上入力してください")
+            .max(140, "140文字以内で入力してください");
+
+        const validatedContent = contentSchema.parse(content);
+
+        // 投稿の存在確認と権限チェック
+        const post = await prisma.post.findUnique({
+            where: { id: postId },
+        });
+
+        if (!post) {
+            throw new Error("投稿が見つかりません");
+        }
+
+        if (post.authorId !== userId) {
+            throw new Error("この投稿を編集する権限がありません");
+        }
+
+        // 投稿内容を更新
+        await prisma.post.update({
+            where: { id: postId },
+            data: { content: validatedContent },
+        });
+
+        revalidatePath("/");
+
+        return { success: true };
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            throw new Error(error.errors.map((e) => e.message).join(", "));
+        }
+        throw error;
+    }
+};
+
 export const followAction = async (userId: string) => {
     const { userId: currentUserId } = auth();
     if (!currentUserId) {

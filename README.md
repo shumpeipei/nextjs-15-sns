@@ -1,42 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js SNS
 
-## Getting Started
+Next.js App Routerで構成したSNSのサンプルです。Clerkで認証し、Prisma + PostgreSQLでユーザー/投稿/いいね/フォローを永続化しています。
 
-First, run the development server:
+## 主な機能
+- タイムライン（自分 + フォロー中の投稿を表示）
+- 投稿作成（140文字制限、Zodでバリデーション）
+- いいね（楽観的UI）
+- フォロー/フォロー解除（楽観的UI）
+- プロフィールページ（投稿/フォロー数表示）
 
+## 技術スタック
+- Next.js 14.2（App Router）
+- React 18 / TypeScript
+- Tailwind CSS
+- Clerk（認証）
+- Prisma / PostgreSQL
+
+## ドメイン設計（主要エンティティ）
+- `User` ユーザー本体（Clerk連携）。投稿、いいね、返信、フォロー関係の起点。
+- `Post` 投稿。`User`が作成し、`Like`や`Reply`を持つ。
+- `Like` ユーザーが投稿に付けるいいね。`User`と`Post`の中間テーブル。
+- `Reply` 投稿への返信。`User`と`Post`に紐づく。
+- `Follow` フォロー関係。`User`同士の中間テーブル（フォロー/フォロワー）。
+
+## 主要ディレクトリ
+- `app/` ルーティング・ページ・レイアウト
+- `components/` UIコンポーネント
+- `lib/` サーバーアクション、Prismaクライアント、データ取得
+- `prisma/` スキーマ定義
+
+## セットアップ
+
+### 1) 依存関係のインストール
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2) 環境変数を設定
+`.env.local`に必要な値を設定してください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Database
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DB_NAME"
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_..."
+CLERK_SECRET_KEY="sk_..."
+WEBHOOK_SECRET="whsec_..."
+```
 
-## Learn More
+### 3) Prismaの初期化
+```bash
+npx prisma migrate dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4) 開発サーバー起動
+```bash
+npm run dev
+```
+ブラウザで `http://localhost:3000` を開いてください。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5) ngrokで外部公開（任意）
+別ターミナルで以下を実行すると、外部URLでアクセスできます。
+```bash
+ngrok http 3000
+```
+起動時に表示されるURLを利用してください。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Webhook
+ClerkのWebhook送信先は次のエンドポイントです。
+- `POST /api/callback/clerk`
 
-## Deploy on Vercel
+`user.created` と `user.updated` を受信して、Prismaの`User`を作成/更新します。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## スクリプト
+- `npm run dev` 開発サーバー起動
+- `npm run build` ビルド
+- `npm run start` 本番起動
+- `npm run lint` Lint実行
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## テスト起動メモ
-npm起動（localhostで接続できる）
-$ npm run dev
-ngrok起動（外部URLでアクセスできる。URLは起動コマンド内に出力される）
-$ ngrok http 3000
+## 補足
+- プロフィールページ: `app/profile/[username]/page.tsx`
+- タイムライン表示: `lib/postDataFetcher.ts`
+- 投稿/いいね/フォローのサーバーアクション: `lib/action.ts`
