@@ -46,7 +46,7 @@ export default async function ProfilePage({ params, }: { params: { username: str
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
-        <div className="container py-6 md:py-10 lg:py-12 mx-auto">
+        <div className="container mx-auto px-4 md:px-6 py-6 md:py-10 lg:py-12">
           <div className="grid gap-6 md:grid-cols-[1fr_300px]">
             <div>
               <div className="flex items-center gap-6">
