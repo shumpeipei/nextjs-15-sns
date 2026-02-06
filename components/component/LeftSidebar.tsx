@@ -20,6 +20,7 @@ const navItems = [
   { icon: HeartIcon, label: "Likes", href: "/likes" },
 ];
 
+// ナビゲーションとユーザー情報を表示する左サイドバー。
 export default function LeftSidebar() {
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-md p-4 h-full flex flex-col">

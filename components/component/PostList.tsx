@@ -5,6 +5,7 @@ import { fetchposts } from "@/lib/postDataFetcher";
 import Post from "./post";
 
 
+// 指定ユーザー（または全体）の投稿一覧を取得して表示。
 export default async function PostList({ username }: { username?: string }) {
 
   const { userId } = auth();

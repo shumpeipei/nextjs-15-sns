@@ -10,6 +10,7 @@ interface FollowButtonProps {
     isFollowing: boolean,
 }
 
+// フォロー/フォロー解除を楽観的UIで切り替えるボタン。
 const FollowButton = ({ isCurrentUser, userId, isFollowing }: FollowButtonProps) => {
 
     const [optimisticFollow, addOptimisticFollow] = useOptimistic<

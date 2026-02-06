@@ -8,6 +8,7 @@ import SubmitButton from "./SubmitButton";
 import { useFormState } from "react-dom";
 import { initialize } from "next/dist/server/lib/render-server";
 
+// 新規投稿の入力フォームを提供。
 export default function PostForm() {
   const initialize = {
     error: undefined,

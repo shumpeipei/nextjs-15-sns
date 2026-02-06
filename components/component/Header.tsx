@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { LogInIcon, SearchIcon, BellIcon, MailIcon } from "./Icons";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
+// ロゴ、検索、通知、ユーザーメニューをまとめたヘッダー。
 export default function Header() {
   return (
     <header className="bg-white dark:bg-gray-800 shadow-md px-4 md:px-6 py-3 flex items-center justify-between">

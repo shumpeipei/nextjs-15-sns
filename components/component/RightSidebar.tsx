@@ -1,6 +1,7 @@
 // components/RightSidebar.tsx
 import Link from "next/link";
 
+// トレンドなど補助情報を表示する右サイドバー。
 export default function RightSidebar() {
   const trendingTopics = [
     { tag: "#technology", count: "12.3K" },

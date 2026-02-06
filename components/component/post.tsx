@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import PostInterction from "./postInterction";
 import Link from "next/link";
 
+// 1件の投稿カードを表示するコンポーネント。
 const Post = ({ post, currentUserId }: { post: any; currentUserId: string }) => {
   return (
     <div

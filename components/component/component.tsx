@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
+// 画面全体の構成サンプル（デザイン検討用）。
 export function Component() {
   return (
     <div className="flex flex-col h-screen">

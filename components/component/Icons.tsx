@@ -1,6 +1,7 @@
 // components/Icons.tsx
 import { SVGProps } from "react";
 
+// 通知ベルのアイコン。
 export function BellIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -21,6 +22,7 @@ export function BellIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// ブックマークのアイコン。
 export function BookmarkIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -40,6 +42,7 @@ export function BookmarkIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// 時計（時刻）のアイコン。
 export function ClockIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -60,6 +63,7 @@ export function ClockIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// コンパス（探索）のアイコン。
 export function CompassIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -80,6 +84,7 @@ export function CompassIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// ハート（いいね）のアイコン。
 export function HeartIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -99,6 +104,7 @@ export function HeartIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// ホームのアイコン。
 export function HomeIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -119,6 +125,7 @@ export function HomeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// ログインのアイコン。
 export function LogInIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -140,6 +147,7 @@ export function LogInIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// メールのアイコン。
 export function MailIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -160,6 +168,7 @@ export function MailIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// メッセージのアイコン。
 export function MessageCircleIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -179,6 +188,7 @@ export function MessageCircleIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// 検索のアイコン。
 export function SearchIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -199,6 +209,7 @@ export function SearchIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// 送信のアイコン。
 export function SendIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -219,6 +230,7 @@ export function SendIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// 設定のアイコン。
 export function SettingsIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

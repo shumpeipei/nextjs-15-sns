@@ -7,6 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { use } from "react";
 
+// ユーザープロフィールと投稿一覧を表示するページ。
 export default async function ProfilePage({ params, }: { params: { username: string }; }) {
 
   const username = params.username;

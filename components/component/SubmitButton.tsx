@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { SendIcon } from "./Icons";
 import { useFormStatus } from "react-dom";
 
+// フォーム送信中の状態を反映する送信ボタン。
 const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
@@ -16,4 +17,3 @@ const SubmitButton = () => {
 };
 
 export default SubmitButton;
-
