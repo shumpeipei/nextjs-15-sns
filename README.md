@@ -5,6 +5,7 @@ Next.js App Routerで構成したSNSのサンプルです。Clerkで認証し、
 ## 主な機能
 - タイムライン（自分 + フォロー中の投稿を表示）
 - 投稿作成（140文字制限、Zodでバリデーション）
+- 投稿編集（自分の投稿のみ）
 - いいね（楽観的UI）
 - フォロー/フォロー解除（楽観的UI）
 - プロフィールページ（投稿/フォロー数表示）
@@ -30,6 +31,9 @@ Next.js App Routerで構成したSNSのサンプルです。Clerkで認証し、
 - `prisma/` スキーマ定義
 
 ## セットアップ
+
+### 動作環境
+- Node.js 20.x（Volta設定: 20.15.1）
 
 ### 1) 依存関係のインストール
 ```bash
@@ -78,6 +82,10 @@ ClerkのWebhook送信先は次のエンドポイントです。
 - `npm run build` ビルド
 - `npm run start` 本番起動
 - `npm run lint` Lint実行
+- `npm run test` Jest実行
+- `npm run test:watch` Jest（watchモード）
+- `npm run test:e2e` Playwright実行
+- `npm run test:e2e:ui` Playwright UI実行
 
 ## 補足
 - プロフィールページ: `app/profile/[username]/page.tsx`
